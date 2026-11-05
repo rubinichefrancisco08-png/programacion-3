@@ -5,19 +5,19 @@ class Producto:
         self.precio = precio
         self.__stock = 0
         self.set_stock(stock)
-    
+
     def get_stock(self):
         return self.__stock
- 
+
     def set_stock(self, nuevo_stock):
         if nuevo_stock >= 0:
             self.__stock = nuevo_stock
         else:
             print("Stock inválido")
- 
+
     def mostrar_datos(self):
         print("Nombre:",self.nombre,"\nTipo:",self.tipo,"\nPrecio:",self.precio,"\nStock:",self.__stock,"\n ")
-  
+
     def vender(self, cantidad):
         if cantidad <= 0:
             print("Cantidad invalida")
@@ -28,7 +28,7 @@ class Producto:
         else:
             print("Stock insuficiente")
         print(" ")
-    
+
     def reponer(self, cantidad):
          if cantidad > 0:
              self.__stock = self.__stock + cantidad
@@ -40,7 +40,7 @@ class Alimento(Producto):
     def __init__(self, nombre, precio, stock, vencimiento):
        super().__init__(nombre, "Alimento", precio, stock)
        self.vencimiento = vencimiento
-    
+
     def mostrar_vencimiento(self):
         print("Vto:",self.vencimiento)
 
@@ -48,38 +48,43 @@ class Electronico(Producto):
     def __init__(self, nombre, precio, stock, garantia):
         super().__init__(nombre,"Electronico",precio,stock)
         self.garantia_meses = garantia
-    
+
     def mostrar_garantia(self):
         print("Garantia:", self.garantia_meses ,"meses")
 
-#Actividad 1
+# Actividad 1
 producto = Producto("Arroz","Alimento",2000,8)
 
 producto.vender(3)
 print(producto.get_stock())
-# pienso que va a quedar 5
+# Después de la venta quedan 5 unidades disponibles.
+
 producto.vender(10)
 print(producto.get_stock())
-#no se va a poder vender
+# No se realiza la venta porque se está intentando vender más unidades de las que hay.
+
 producto.set_stock(-5)
 print(producto.get_stock())
-#no va a funcionar
+# El stock sigue siendo el mismo porque el programa no permite establecer valores negativos.
 
-#Actividad 2
+# Actividad 2
 producto.reponer(5)
 print(producto.get_stock())
 
 producto.reponer(-2)
 print(producto.get_stock())
-#la segunda instruccion no deberia afectar porque hay un if que valida si es mayor a 0
+# Al ingresar una cantidad negativa, no se modifica el stock porque no cumple con la condición del if.
 
-#Actividad 3
+# Actividad 3
 leche = Alimento("Leche", 1500, 10, "30/10/2026")
 leche.mostrar_datos()
 leche.mostrar_vencimiento()
 leche.vender(2)
 leche.reponer(4)
 print(leche.get_stock())
-#escribi reponer en la clase producto
-#puede usar ese metodo porque lo hereda de su clase padre
-#la diferencia es que reponer() agrega al stock que ya tenemos lo que vamos a reponer y set_stock() lo reemplaza
+
+# El método reponer() está definido en la clase Producto, por eso no hace falta volver a escribirlo en Alimento.
+
+# La clase Alimento puede utilizarlo porque hereda los métodos de Producto.
+
+# reponer() suma nuevas unidades al stock disponible, mientras que set_stock() establece una cantidad específica y reemplaza el valor anterior.
