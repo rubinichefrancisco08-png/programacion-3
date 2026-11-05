@@ -1,0 +1,29 @@
+1. ¿Cuál es la diferencia entre super().__init__(...) y super().mostrar_datos()?
+   - Ambos llaman a métodos de la clase padre (Producto), pero en momentos y para 
+     objetivos diferentes:
+     * super().__init__(...): Se usa en el constructor (__init__) para inicializar 
+       los atributos básicos heredados (nombre, tipo, precio, stock) al momento de 
+       crear la instancia.
+     * super().mostrar_datos(): Se usa dentro de un método común para ejecutar 
+       la lógica de impresión original de la clase base antes de agregar las 
+       líneas específicas de la clase hija (vencimiento, garantía, talle, etc.).
+
+2. ¿Por qué usamos el mismo producto.mostrar_datos() en el for si hay objetos de clases distintas?
+   - Porque estamos aplicando POLIMORFISMO. Todas las clases (Alimento, Electronico, 
+     Ropa) responden al mismo "mensaje" o método (mostrar_datos). El bucle `for` 
+     no necesita saber la clase exacta de cada producto; solo le pide a cada objeto 
+     que muestre sus datos, y Python ejecuta automáticamente la versión adaptada 
+     a ese tipo de objeto en tiempo de ejecución.
+
+3. ¿Qué parte del ejemplo es herencia y qué parte es polimorfismo?
+   - HERENCIA: Se da cuando Alimento, Electronico y Ropa heredan de Producto 
+     (ej. class Alimento(Producto)), reutilizando la estructura, los atributos y 
+     métodos heredados (como vender()).
+   - POLIMORFISMO: Se da cuando redefinimos (sobrescribimos) mostrar_datos() en 
+     cada clase hija y luego invocamos ese mismo método sobre una lista heterogénea 
+     de productos, obteniendo salidas diferentes según la clase de cada uno.
+
+4. Si agregamos una clase Ropa, ¿qué necesitaría tener para participar del mismo recorrido?
+   - Necesita heredar de Producto (o definir una clase que tenga el método 
+     mostrar_datos() con la misma firma) para poder responder al llamado dentro 
+     del bucle `for` sin romper el flujo del programa.
